@@ -1,0 +1,10 @@
+{
+  "overrides": [
+    {
+      "files": "*.js.map",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}
