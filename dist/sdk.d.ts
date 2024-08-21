@@ -543,6 +543,44 @@ export declare function getMasterCopies(
     `${string}/${string}`
   >
 >;
+export declare function getIndexingStatus(
+  params: operations["ChainsController_getIndexingStatus"]["parameters"],
+): Promise<
+  import("openapi-fetch").FetchResponse<
+    {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          chainId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": import("./schema").components["schemas"]["IndexingStatus"];
+          };
+        };
+      };
+    },
+    {
+      params: {
+        query?: never;
+        header?: never;
+        path: {
+          chainId: string;
+        };
+        cookie?: never;
+      };
+    },
+    `${string}/${string}`
+  >
+>;
 export declare function getCollectibles(
   params: operations["CollectiblesController_getCollectibles"]["parameters"],
 ): Promise<
@@ -2491,7 +2529,8 @@ export declare function getTransactionConfirmationView(
           content: {
             "application/json":
               | import("./schema").components["schemas"]["BaselineConfirmationView"]
-              | import("./schema").components["schemas"]["CowSwapConfirmationView"];
+              | import("./schema").components["schemas"]["CowSwapConfirmationView"]
+              | import("./schema").components["schemas"]["NativeStakingDepositConfirmationView"];
           };
         };
       };

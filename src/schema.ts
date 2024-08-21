@@ -28,6 +28,7 @@ export type ChainPage = components["schemas"]["ChainPage"];
 export type AboutChain = components["schemas"]["AboutChain"];
 export type Backbone = components["schemas"]["Backbone"];
 export type MasterCopy = components["schemas"]["MasterCopy"];
+export type IndexingStatus = components["schemas"]["IndexingStatus"];
 export type Collectible = components["schemas"]["Collectible"];
 export type CollectiblePage = components["schemas"]["CollectiblePage"];
 export type ActivityMetadata = components["schemas"]["ActivityMetadata"];
@@ -112,6 +113,7 @@ export type TransactionItemPage = components["schemas"]["TransactionItemPage"];
 export type ProposeTransactionDto = components["schemas"]["ProposeTransactionDto"];
 export type BaselineConfirmationView = components["schemas"]["BaselineConfirmationView"];
 export type CowSwapConfirmationView = components["schemas"]["CowSwapConfirmationView"];
+export type NativeStakingDepositConfirmationView = components["schemas"]["NativeStakingDepositConfirmationView"];
 
 export interface paths {
     "/about": {
@@ -330,6 +332,22 @@ export interface paths {
             cookie?: never;
         };
         get: operations["ChainsController_getMasterCopies"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/chains/{chainId}/about/indexing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["ChainsController_getIndexingStatus"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1219,6 +1237,10 @@ export interface components {
             address: string;
             version: string;
         };
+        IndexingStatus: {
+            lastSync: number;
+            synced: boolean;
+        };
         Collectible: {
             address: string;
             tokenName: string;
@@ -1925,6 +1947,20 @@ export interface components {
             /** @description The buy token of the order */
             buyToken: components["schemas"]["TokenInfo"];
         };
+        NativeStakingDepositConfirmationView: {
+            /** @enum {string} */
+            type: "KILN_NATIVE_STAKING_DEPOSIT";
+            /** @enum {string} */
+            status: "unknown";
+            method: string;
+            parameters?: components["schemas"]["DataDecodedParameter"][] | null;
+            estimatedEntryTime: number;
+            estimatedExitTime: number;
+            estimatedWithdrawalTime: number;
+            fee: number;
+            monthlyNrr: number;
+            annualNrr: number;
+        };
     };
     responses: never;
     parameters: never;
@@ -2334,6 +2370,27 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MasterCopy"][];
+                };
+            };
+        };
+    };
+    ChainsController_getIndexingStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                chainId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IndexingStatus"];
                 };
             };
         };
@@ -3443,7 +3500,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["BaselineConfirmationView"] | components["schemas"]["CowSwapConfirmationView"];
+                    "application/json": components["schemas"]["BaselineConfirmationView"] | components["schemas"]["CowSwapConfirmationView"] | components["schemas"]["NativeStakingDepositConfirmationView"];
                 };
             };
         };

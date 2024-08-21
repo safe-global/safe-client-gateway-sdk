@@ -76,6 +76,10 @@ export async function getMasterCopies(params: operations["ChainsController_getMa
   return _client.GET('/v1/chains/{chainId}/about/master-copies', { params });
 }
 
+export async function getIndexingStatus(params: operations["ChainsController_getIndexingStatus"]["parameters"]) {
+  return _client.GET('/v1/chains/{chainId}/about/indexing', { params });
+}
+
 export async function getCollectibles(params: operations["CollectiblesController_getCollectibles"]["parameters"]) {
   return _client.GET('/v2/chains/{chainId}/safes/{safeAddress}/collectibles', { params });
 }

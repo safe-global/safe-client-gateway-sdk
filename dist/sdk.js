@@ -24,6 +24,7 @@ exports.getChain = getChain;
 exports.getAboutChain = getAboutChain;
 exports.getBackbone = getBackbone;
 exports.getMasterCopies = getMasterCopies;
+exports.getIndexingStatus = getIndexingStatus;
 exports.getCollectibles = getCollectibles;
 exports.getCampaigns = getCampaigns;
 exports.getCampaignById = getCampaignById;
@@ -126,6 +127,9 @@ async function getBackbone(params) {
 }
 async function getMasterCopies(params) {
   return _client.GET("/v1/chains/{chainId}/about/master-copies", { params });
+}
+async function getIndexingStatus(params) {
+  return _client.GET("/v1/chains/{chainId}/about/indexing", { params });
 }
 async function getCollectibles(params) {
   return _client.GET("/v2/chains/{chainId}/safes/{safeAddress}/collectibles", {
