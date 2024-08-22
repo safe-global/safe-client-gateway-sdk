@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "name": "safe-client-gateway-sdk",
-  "version": "1.53.0-next-073f182",
+  "version": "1.53.0-next-7344903",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

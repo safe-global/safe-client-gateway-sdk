@@ -140,6 +140,7 @@ export type TransactionItem = components["schemas"]["TransactionItem"];
 export type TransactionItemPage = components["schemas"]["TransactionItemPage"];
 export type ProposeTransactionDto =
   components["schemas"]["ProposeTransactionDto"];
+export type CreationTransaction = components["schemas"]["CreationTransaction"];
 export type BaselineConfirmationView =
   components["schemas"]["BaselineConfirmationView"];
 export type CowSwapConfirmationView =
@@ -1079,6 +1080,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/v1/chains/{chainId}/safes/{safeAddress}/transactions/creation": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["TransactionsController_getCreationTransaction"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/v1/chains/{chainId}/safes/{safeAddress}/views/transaction-confirmation": {
     parameters: {
       query?: never;
@@ -1306,7 +1323,13 @@ export interface components {
       startDate: string;
       endDate: string;
       lastUpdated?: string | null;
-      activitiesMetadata: components["schemas"]["ActivityMetadata"][];
+      activitiesMetadata?: components["schemas"]["ActivityMetadata"][] | null;
+      rewardValue: string;
+      rewardText?: string | null;
+      iconUrl?: string | null;
+      safeAppUrl?: string | null;
+      partnerUrl?: string | null;
+      isPromoted: boolean;
     };
     CampaignPage: {
       count?: number | null;
@@ -1999,6 +2022,16 @@ export interface components {
       sender: string;
       signature?: string | null;
       origin?: string | null;
+    };
+    CreationTransaction: {
+      /** Format: date-time */
+      created: string;
+      creator: string;
+      transactionHash: string;
+      factoryAddress: string;
+      masterCopy?: string | null;
+      setupData?: string | null;
+      dataDecoded?: components["schemas"]["DataDecoded"] | null;
     };
     BaselineConfirmationView: {
       /** @enum {string} */
@@ -3577,6 +3610,28 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["Transaction"];
+        };
+      };
+    };
+  };
+  TransactionsController_getCreationTransaction: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        chainId: string;
+        safeAddress: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CreationTransaction"];
         };
       };
     };

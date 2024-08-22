@@ -2501,6 +2501,46 @@ export declare function proposeTransaction(
     `${string}/${string}`
   >
 >;
+export declare function getCreationTransaction(
+  params: operations["TransactionsController_getCreationTransaction"]["parameters"],
+): Promise<
+  import("openapi-fetch").FetchResponse<
+    {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          chainId: string;
+          safeAddress: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": import("./schema").components["schemas"]["CreationTransaction"];
+          };
+        };
+      };
+    },
+    {
+      params: {
+        query?: never;
+        header?: never;
+        path: {
+          chainId: string;
+          safeAddress: string;
+        };
+        cookie?: never;
+      };
+    },
+    `${string}/${string}`
+  >
+>;
 export declare function getTransactionConfirmationView(
   params: operations["TransactionsViewController_getTransactionConfirmationView"]["parameters"],
   body: operations["TransactionsViewController_getTransactionConfirmationView"]["requestBody"]["content"]["application/json"],

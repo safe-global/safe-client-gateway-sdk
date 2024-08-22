@@ -68,6 +68,7 @@ exports.previewTransaction = previewTransaction;
 exports.getTransactionQueue = getTransactionQueue;
 exports.getTransactionsHistory = getTransactionsHistory;
 exports.proposeTransaction = proposeTransaction;
+exports.getCreationTransaction = getCreationTransaction;
 exports.getTransactionConfirmationView = getTransactionConfirmationView;
 const openapi_fetch_1 = __importDefault(require("openapi-fetch"));
 const createClient = openapi_fetch_1.default;
@@ -328,6 +329,12 @@ async function proposeTransaction(params, body) {
   return _client.POST(
     "/v1/chains/{chainId}/transactions/{safeAddress}/propose",
     { params, body },
+  );
+}
+async function getCreationTransaction(params) {
+  return _client.GET(
+    "/v1/chains/{chainId}/safes/{safeAddress}/transactions/creation",
+    { params },
   );
 }
 async function getTransactionConfirmationView(params, body) {

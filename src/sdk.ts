@@ -252,6 +252,10 @@ export async function proposeTransaction(params: operations["TransactionsControl
   return _client.POST('/v1/chains/{chainId}/transactions/{safeAddress}/propose', { params, body });
 }
 
+export async function getCreationTransaction(params: operations["TransactionsController_getCreationTransaction"]["parameters"]) {
+  return _client.GET('/v1/chains/{chainId}/safes/{safeAddress}/transactions/creation', { params });
+}
+
 export async function getTransactionConfirmationView(params: operations["TransactionsViewController_getTransactionConfirmationView"]["parameters"], body: operations["TransactionsViewController_getTransactionConfirmationView"]["requestBody"]['content']['application/json']) {
   return _client.POST('/v1/chains/{chainId}/safes/{safeAddress}/views/transaction-confirmation', { params, body });
 }
