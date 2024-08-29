@@ -48,6 +48,14 @@ export async function getCounterfactualSafes(params: operations["CounterfactualS
   return _client.GET('/v1/accounts/{address}/counterfactual-safes', { params });
 }
 
+export async function getNonce(params: operations["AuthController_getNonce"]["parameters"]) {
+  return _client.GET('/v1/auth/nonce', { params });
+}
+
+export async function verify(params: operations["AuthController_verify"]["parameters"], body: operations["AuthController_verify"]["requestBody"]['content']['application/json']) {
+  return _client.POST('/v1/auth/verify', { params, body });
+}
+
 export async function getBalances(params: operations["BalancesController_getBalances"]["parameters"]) {
   return _client.GET('/v1/chains/{chainId}/safes/{safeAddress}/balances/{fiatCode}', { params });
 }

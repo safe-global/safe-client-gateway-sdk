@@ -17,6 +17,8 @@ exports.getAccountDataSettings = getAccountDataSettings;
 exports.getAccount = getAccount;
 exports.getCounterfactualSafe = getCounterfactualSafe;
 exports.getCounterfactualSafes = getCounterfactualSafes;
+exports.getNonce = getNonce;
+exports.verify = verify;
 exports.getBalances = getBalances;
 exports.getSupportedFiatCodes = getSupportedFiatCodes;
 exports.getChains = getChains;
@@ -104,6 +106,12 @@ async function getCounterfactualSafe(params) {
 }
 async function getCounterfactualSafes(params) {
   return _client.GET("/v1/accounts/{address}/counterfactual-safes", { params });
+}
+async function getNonce(params) {
+  return _client.GET("/v1/auth/nonce", { params });
+}
+async function verify(params, body) {
+  return _client.POST("/v1/auth/verify", { params, body });
 }
 async function getBalances(params) {
   return _client.GET(

@@ -273,6 +273,81 @@ export declare function getCounterfactualSafes(
     `${string}/${string}`
   >
 >;
+export declare function getNonce(
+  params: operations["AuthController_getNonce"]["parameters"],
+): Promise<
+  import("openapi-fetch").FetchResponse<
+    {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": import("./schema").components["schemas"]["AuthNonce"];
+          };
+        };
+      };
+    },
+    {
+      params: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+    },
+    `${string}/${string}`
+  >
+>;
+export declare function verify(
+  params: operations["AuthController_verify"]["parameters"],
+  body: operations["AuthController_verify"]["requestBody"]["content"]["application/json"],
+): Promise<
+  import("openapi-fetch").FetchResponse<
+    {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": import("./schema").components["schemas"]["SiweDto"];
+        };
+      };
+      responses: {
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    },
+    {
+      params: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      body: {
+        message: string;
+        signature: string;
+      };
+    },
+    `${string}/${string}`
+  >
+>;
 export declare function getBalances(
   params: operations["BalancesController_getBalances"]["parameters"],
 ): Promise<
@@ -1027,6 +1102,7 @@ export declare function getDataDecoded(
       body: {
         data: string;
         to?: string;
+        value?: string;
       };
     },
     `${string}/${string}`
@@ -2588,6 +2664,7 @@ export declare function getTransactionConfirmationView(
       body: {
         data: string;
         to?: string;
+        value?: string;
       };
     },
     `${string}/${string}`

@@ -13,6 +13,8 @@ export type UpsertAccountDataSettingsDto =
 export type CounterfactualSafe = components["schemas"]["CounterfactualSafe"];
 export type CreateCounterfactualSafeDto =
   components["schemas"]["CreateCounterfactualSafeDto"];
+export type AuthNonce = components["schemas"]["AuthNonce"];
+export type SiweDto = components["schemas"]["SiweDto"];
 export type Token = components["schemas"]["Token"];
 export type Balance = components["schemas"]["Balance"];
 export type Balances = components["schemas"]["Balances"];
@@ -255,6 +257,38 @@ export interface paths {
     put: operations["CounterfactualSafesController_createCounterfactualSafe"];
     post?: never;
     delete: operations["CounterfactualSafesController_deleteCounterfactualSafes"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/auth/nonce": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["AuthController_getNonce"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/auth/verify": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations["AuthController_verify"];
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -1169,6 +1203,13 @@ export interface components {
       singletonAddress: string;
       threshold: number;
     };
+    AuthNonce: {
+      nonce: string;
+    };
+    SiweDto: {
+      message: string;
+      signature: string;
+    };
     Token: {
       address: string;
       decimals?: number | null;
@@ -1324,7 +1365,7 @@ export interface components {
       endDate: string;
       lastUpdated?: string | null;
       activitiesMetadata?: components["schemas"]["ActivityMetadata"][] | null;
-      rewardValue: string;
+      rewardValue?: string | null;
       rewardText?: string | null;
       iconUrl?: string | null;
       safeAppUrl?: string | null;
@@ -1415,6 +1456,8 @@ export interface components {
       data: string;
       /** @description The target Ethereum address */
       to?: string;
+      /** @description The wei amount being sent to a payable function */
+      value?: string;
     };
     DataDecodedParameter: {
       name: string;
@@ -2086,7 +2129,13 @@ export interface components {
       /** @enum {string} */
       type: "KILN_NATIVE_STAKING_DEPOSIT";
       /** @enum {string} */
-      status: "unknown";
+      status:
+        | "AWAITING_ENTRY"
+        | "REQUESTED_EXIT"
+        | "SIGNATURE_NEEDED"
+        | "VALIDATING"
+        | "WITHDRAWN"
+        | "UNKNOWN";
       method: string;
       parameters?: components["schemas"]["DataDecodedParameter"][] | null;
       estimatedEntryTime: number;
@@ -2095,6 +2144,13 @@ export interface components {
       fee: number;
       monthlyNrr: number;
       annualNrr: number;
+      value: string;
+      numValidators: number;
+      expectedAnnualReward: string;
+      expectedMonthlyReward: string;
+      expectedFiatAnnualReward: number;
+      expectedFiatMonthlyReward: number;
+      tokenInfo: components["schemas"]["TokenInfo"];
     };
   };
   responses: never;
@@ -2353,6 +2409,47 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  AuthController_getNonce: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AuthNonce"];
+        };
+      };
+    };
+  };
+  AuthController_verify: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SiweDto"];
+      };
+    };
+    responses: {
+      /** @description Empty response body. JWT token is set as response cookie. */
       200: {
         headers: {
           [name: string]: unknown;
