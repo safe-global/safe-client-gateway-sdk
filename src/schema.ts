@@ -2027,7 +2027,7 @@ export interface components {
             /** @enum {string} */
             type: "KILN_NATIVE_STAKING_DEPOSIT";
             /** @enum {string} */
-            status: "AWAITING_ENTRY" | "REQUESTED_EXIT" | "SIGNATURE_NEEDED" | "VALIDATING" | "WITHDRAWN" | "UNKNOWN";
+            status: "AWAITING_ENTRY" | "AWAITING_EXECUTION" | "REQUESTED_EXIT" | "SIGNATURE_NEEDED" | "VALIDATION_STARTED" | "WITHDRAWN" | "UNKNOWN";
             method: string;
             parameters?: components["schemas"]["DataDecodedParameter"][] | null;
             estimatedEntryTime: number;

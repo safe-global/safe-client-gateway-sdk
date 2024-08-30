@@ -2131,9 +2131,10 @@ export interface components {
       /** @enum {string} */
       status:
         | "AWAITING_ENTRY"
+        | "AWAITING_EXECUTION"
         | "REQUESTED_EXIT"
         | "SIGNATURE_NEEDED"
-        | "VALIDATING"
+        | "VALIDATION_STARTED"
         | "WITHDRAWN"
         | "UNKNOWN";
       method: string;
